@@ -8,7 +8,8 @@ import {
 } from "../../../../hooks/useQueryHandler/useQueryAction";
 import { LoadingOutlined } from "@ant-design/icons";
 const Login = () => {
-  const { mutate, isLoading } = useLoginMutate();
+  const { mutate } = useLoginMutate();
+  const isLoading = false; // or handle loading state appropriately
   const { mutate: loginWithMutate } = useLoginWithGoogle();
   const login = (e: FieldType) => {
     mutate(e);

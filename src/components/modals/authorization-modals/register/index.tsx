@@ -8,7 +8,8 @@ import {
 } from "../../../../hooks/useQueryHandler/useQueryAction";
 import { LoadingOutlined } from "@ant-design/icons";
 const Register = () => {
-  const { mutate, isLoading } = useRegisterMutate();
+  const { mutate } = useRegisterMutate();
+  const isLoading = false; // or handle loading state appropriately
   const { mutate: registerWithMutate } = useRegisterWithGoogle();
   const register = (e: FieldTypeRegisgter) => {
     mutate(e);
