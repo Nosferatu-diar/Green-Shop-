@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // icons
 import logo from "../../assets/icons/logo.svg";
@@ -13,12 +13,16 @@ import {
 import { useReduxDispatch } from "../../hooks/useRedux";
 import { setModalAuthorizationModalVisibilty } from "../../redux/modalSlice";
 import { useState } from "react";
+import { cookieInfo } from "../../generic/cookies";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const dispatch = useReduxDispatch();
-  const user = JSON.parse(localStorage.getItem("user") as string);
+  const { isAuthorization, getCookie } = cookieInfo();
+  const user = getCookie("user");
+  const navigate = useNavigate();
+  //   const user = JSON.parse(localStorage.getItem("user") as string);
   return (
     <header className="flex items-center justify-between max-[530px]:justify-around py-5 border-b border-[#a2d1ab]">
       {/* logo */}
@@ -71,10 +75,16 @@ const Navbar = () => {
 
         {/* Login */}
         <button
-          onClick={() => dispatch(setModalAuthorizationModalVisibilty())}
+          onClick={() => {
+            if (isAuthorization) {
+              navigate("/profile");
+            } else {
+              dispatch(setModalAuthorizationModalVisibilty());
+            }
+          }}
           className="w-[100px] h-[35px] bg-[#46a358] text-white rounded-md flex items-center gap-2 justify-center cursor-pointer max-[400px]:hidden"
         >
-          {user ? (
+          {isAuthorization ? (
             user.name
           ) : (
             <>
@@ -145,7 +155,7 @@ const Navbar = () => {
             onClick={() => dispatch(setModalAuthorizationModalVisibilty())}
             className="w-[100px] h-[35px] bg-[#46a358] text-white rounded-md flex items-center gap-2 justify-center cursor-pointer "
           >
-            {user ? (
+            {isAuthorization ? (
               user.name
             ) : (
               <>

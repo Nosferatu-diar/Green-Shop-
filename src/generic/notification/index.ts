@@ -1,5 +1,5 @@
+import "@ant-design/v5-patch-for-react-19";
 import { notification } from "antd";
-
 type NotificationApiType = "login" | "register" | "login_google" | 406;
 
 export const notificationApi = () => {

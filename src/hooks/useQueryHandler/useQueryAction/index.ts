@@ -3,31 +3,23 @@ import { useAxios } from "../../useAxios";
 import { useReduxDispatch } from "../../useRedux";
 import { setModalAuthorizationModalVisibilty } from "../../../redux/modalSlice";
 import { notificationApi } from "../../../generic/notification";
-import useSignIn from "react-auth-kit/hooks/useSignIn";
 import { signInWithGoogle } from "../../../config";
+import { cookieInfo } from "../../../generic/cookies";
 
 // login
 export const useLoginMutate = () => {
   const axios = useAxios();
   const dispatch = useReduxDispatch();
   const notify = notificationApi();
-  const signIn = useSignIn();
+  const { setCookie } = cookieInfo();
   return useMutation({
     mutationFn: (data: object) =>
       axios({ url: "user/sign-in", method: "POST", body: data }),
     onSuccess: (data) => {
       const { token, user } = data.data;
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-      signIn({
-        auth: {
-          token,
-          type: "Bearer",
-        },
-        userState: {
-          ...user,
-        },
-      });
+      setCookie("user", user);
+      // localStorage.setItem("user", JSON.stringify(user));
       notify("login");
       dispatch(setModalAuthorizationModalVisibilty());
     },
@@ -39,7 +31,7 @@ export const useRegisterMutate = () => {
   const axios = useAxios();
   const notify = notificationApi();
   const dispatch = useReduxDispatch();
-
+  const { setCookie } = cookieInfo();
   return useMutation({
     mutationFn: (data: object) =>
       axios({ url: "user/sign-up", method: "POST", body: data }),
@@ -47,7 +39,8 @@ export const useRegisterMutate = () => {
       console.log("useMutation onSuccess data :", data);
       const { token, user } = data.data;
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      setCookie("user", user);
+      // localStorage.setItem("user", JSON.stringify(user));
       notify("register");
       dispatch(setModalAuthorizationModalVisibilty());
     },
@@ -62,6 +55,7 @@ export const useLoginWithGoogle = () => {
   const axios = useAxios();
   const dispatch = useReduxDispatch();
   const notify = notificationApi();
+  const { setCookie } = cookieInfo();
 
   return useMutation({
     mutationFn: async () => {
@@ -75,7 +69,8 @@ export const useLoginWithGoogle = () => {
     onSuccess: (data) => {
       const { token, user } = data.data;
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      setCookie("user", user);
+      // localStorage.setItem("user", JSON.stringify(user));
       notify("login_google");
       dispatch(setModalAuthorizationModalVisibilty());
     },
@@ -87,6 +82,7 @@ export const useRegisterWithGoogle = () => {
   const axios = useAxios();
   const dispatch = useReduxDispatch();
   const notify = notificationApi();
+  const { setCookie } = cookieInfo();
 
   return useMutation({
     mutationFn: async () => {
@@ -100,7 +96,8 @@ export const useRegisterWithGoogle = () => {
     onSuccess: (data) => {
       const { token, user } = data.data;
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      setCookie("user", user);
+      // localStorage.setItem("user", JSON.stringify(user));
       notify("login_google");
       dispatch(setModalAuthorizationModalVisibilty());
     },
