@@ -70,3 +70,37 @@ export interface CartType {
   _id: string;
   detailed_images: string[];
 }
+
+export interface PostMockItemType {
+  id: number;
+  title: string;
+  subTitle: string;
+  description: string;
+  img: string;
+}
+
+export interface InfoMockItemType {
+  id: number;
+  title: string;
+  description: string;
+  img: string;
+  vektor: string;
+}
+
+export interface FooterLinksType {
+  id: number;
+  title: string;
+  link1: string;
+  link2: string;
+  link3: string;
+  link4?: string;
+  link5?: string;
+}
+
+export interface AdviceMockItemType {
+  id: number;
+  title: string;
+  description: string;
+  img: string;
+  border: boolean;
+}
