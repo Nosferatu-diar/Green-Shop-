@@ -1,6 +1,12 @@
 import { Form, Input } from "antd";
+import { useSendEmail } from "../../../../hooks/useQueryHandler/useQueryAction";
+import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const AdvcieEmail = () => {
+  const { mutate, isLoading, isSuccess } = useSendEmail();
+  const submit = (e: { email: string }) => {
+    mutate(e);
+  };
   return (
     <div>
       {/* Title Section */}
@@ -9,7 +15,7 @@ const AdvcieEmail = () => {
       </h1>
 
       {/* Form Section */}
-      <Form className="!flex !mt-5 ">
+      <Form onFinish={submit} className="!flex !mt-5 ">
         <Form.Item
           name="email"
           className="w-4/5 rounded-s-xl pl-[11px] placeholder:font-light"
@@ -31,8 +37,17 @@ const AdvcieEmail = () => {
           />
         </Form.Item>
         <Form.Item>
-          <button className="bg-[#46A358] flex items-center justify-center gap-1 text-base text-white h-[40px] px-4 rounded-r-md cursor-pointer rounded-nc">
-            Join
+          <button
+            disabled={isSuccess}
+            className="bg-[#46A358] flex items-center justify-center gap-1 text-base text-white h-[40px] px-4 rounded-r-md cursor-pointer rounded-nc"
+          >
+            {isLoading ? (
+              <LoadingOutlined />
+            ) : isSuccess ? (
+              <CheckOutlined />
+            ) : (
+              "Join"
+            )}
           </button>
         </Form.Item>
       </Form>

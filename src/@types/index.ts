@@ -69,6 +69,7 @@ export interface CartType {
   views: number;
   _id: string;
   detailed_images: string[];
+  created_by: string;
 }
 
 export interface PostMockItemType {
@@ -103,4 +104,29 @@ export interface AdviceMockItemType {
   description: string;
   img: string;
   border: boolean;
+}
+
+export interface AuthUser {
+  _id?: string;
+  email?: string;
+  name?: string;
+  surname?: string;
+  profile_photo?: string;
+  create_account_limit?: number;
+  phone_number?: string;
+  //   wishlist?: WishListItemType[];
+  username?: string;
+  //   billing_address?: BillingAdres;
+  followers?: string[];
+  permission?: {
+    create: boolean;
+    update: boolean;
+    delete: boolean;
+    read: boolean;
+  };
+}
+
+export interface CartTypeData extends CartType {
+  counter: number;
+  userPrice: number;
 }

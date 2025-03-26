@@ -62,7 +62,9 @@ const Navbar = () => {
       <div className="flex items-center  gap-6">
         <SearchOutlined className="text-[25px]" />
         <BellOutlined className="text-[25px]" />
-        <ShoppingCartOutlined className="text-[25px]" />
+        <div onClick={()=> navigate("/products-shop")} className="cursor-pointer">
+          <ShoppingCartOutlined className="text-[25px]" />
+        </div>
 
         {/* Burger/Menu btn */}
         <button

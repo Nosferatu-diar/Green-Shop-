@@ -5,6 +5,7 @@ import { setModalAuthorizationModalVisibilty } from "../../../redux/modalSlice";
 import { notificationApi } from "../../../generic/notification";
 import { signInWithGoogle } from "../../../config";
 import { cookieInfo } from "../../../generic/cookies";
+import { getCoupon } from "../../../redux/shopSlice";
 
 // login
 export const useLoginMutate = () => {
@@ -105,6 +106,40 @@ export const useRegisterWithGoogle = () => {
       if (error.status == 406) {
         notify(406);
       }
+    },
+  });
+};
+
+export const useSendEmail = () => {
+  const axios = useAxios();
+  const notify = notificationApi();
+  return useMutation({
+    mutationFn: (data: object) =>
+      axios({
+        url: "features/email-subscribe",
+        method: "POST",
+        body: data,
+      }),
+    onSuccess: () => {
+      notify("send_email");
+    },
+  });
+};
+
+// get Coupon
+export const useGetCoupon = () => {
+  const axios = useAxios();
+  const notify = notificationApi();
+  const dispatch = useReduxDispatch();
+  return useMutation({
+    mutationFn: (coupon_code: string) =>
+      axios({ url: "features/coupon", params: { coupon_code } }),
+    onSuccess: (data) => {
+      dispatch(getCoupon(Number(data.data.discount_for))); 
+      notify("coupon");
+    },
+    onError: () => {
+      notify("404_coupon");
     },
   });
 };
