@@ -4,6 +4,8 @@ import Home from "../pages/home";
 import Shop from "../pages/shop";
 import ProductsShop from "../pages/products-shop";
 import ProcedCheckout from "../pages/proced-checkout";
+import Blog from "../pages/blog";
+import Rendering from "../components/blog/rendering";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ export const router = createBrowserRouter([
       {
         path: "/proced-checkout",
         element: <ProcedCheckout />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/blog/:created_by/:id",
+        element: <Rendering />,
       },
     ],
   },

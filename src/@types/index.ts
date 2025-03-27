@@ -161,3 +161,14 @@ export interface MakeOrderType {
   comment: string;
   payment_method: string;
 }
+
+export interface BlogType {
+  content: string;
+  created_at: string;
+  created_by: string;
+  reaction_length: number;
+  short_description: string;
+  title: string;
+  views: number;
+  _id: string;
+}

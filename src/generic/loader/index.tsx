@@ -1,4 +1,4 @@
-import { Skeleton } from "antd";
+import { Card, Skeleton } from "antd";
 
 const useLoader = () => {
   const category_loader = () => {
@@ -28,7 +28,46 @@ const useLoader = () => {
     ));
   };
 
-  return { category_loader, discount_loader, cart_loader };
+  const blog_card_loader = () => {
+    return Array.from({ length: 6 }).map((_, idx) => {
+      return (
+        <Card key={idx}>
+          <Skeleton />
+        </Card>
+      );
+    });
+  };
+  const blog_id_loading = () => {
+    return (
+      <div>
+        <div className="flex items-center justify-between mt-5">
+          <div className="flex items-center gap-5">
+            <Skeleton.Avatar active />
+            <Skeleton.Input active />
+          </div>
+          <Skeleton.Input active />
+        </div>
+        <div>
+          <Skeleton.Input active className="!my-[15px]" />
+          {Array.from({ length: 20 }).map((_, idx) => (
+            <Skeleton.Input
+              key={idx}
+              active
+              className="!w-full !my-[10px] !h-[20px]"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  return {
+    category_loader,
+    discount_loader,
+    cart_loader,
+    blog_card_loader,
+    blog_id_loading,
+  };
 };
 
 export default useLoader;

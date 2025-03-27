@@ -34,6 +34,7 @@ const Navbar = () => {
       {/* Categories */}
       <div className="flex items-center gap-8 max-[820px]:hidden">
         <h3
+          onClick={() => navigate("/")}
           className={`cursor-pointer ${pathname === "/" && "text-[#46a358]"}`}
         >
           Home
@@ -53,11 +54,12 @@ const Navbar = () => {
           Plant Care
         </h3>
         <h3
+          onClick={() => navigate("blog")}
           className={`cursor-pointer ${
-            pathname === "/blogs" && "text-[#46a358]"
+            pathname === "/blog" && "text-[#46a358]"
           }`}
         >
-          Blogs
+          Blog
         </h3>
       </div>
       {/* Btns */}
