@@ -3,14 +3,14 @@ import { AuthUser, QueryType } from "../../../../@types";
 import useQueryHandler from "../../../../hooks/useQueryHandler";
 
 const UserInfo = (props: { id?: string }) => {
-  const { data, isLoading, isError }: QueryType<AuthUser> = useQueryHandler({
+  const { data, isPending, isError }: QueryType<AuthUser> = useQueryHandler({
     pathname: "userinfo",
     url: `user/by_id/${props.id}`,
   });
 
   return (
     <div>
-      {isLoading || isError ? (
+      {isPending || isError ? (
         <Skeleton.Avatar className="!w-[75px] !h-[75px]" />
       ) : (
         <Tooltip

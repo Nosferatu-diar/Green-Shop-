@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialStateType {
   modalAuthorizationVisibilty: boolean;
+  orderModalVisibilty: boolean;
 }
 
 const initialState: InitialStateType = {
   modalAuthorizationVisibilty: false,
+  orderModalVisibilty: false,
 };
 
 const modalSlice = createSlice({
@@ -15,8 +17,12 @@ const modalSlice = createSlice({
     setModalAuthorizationModalVisibilty(state) {
       state.modalAuthorizationVisibilty = !state.modalAuthorizationVisibilty;
     },
+    setOrderModalVisibilty(state) {
+      state.orderModalVisibilty = !state.orderModalVisibilty;
+    },
   },
 });
 
-export const { setModalAuthorizationModalVisibilty } = modalSlice.actions;
+export const { setModalAuthorizationModalVisibilty, setOrderModalVisibilty } =
+  modalSlice.actions;
 export default modalSlice.reducer;

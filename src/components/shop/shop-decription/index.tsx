@@ -4,7 +4,7 @@ import { Skeleton } from "antd";
 
 const ShopDescription: FC<QueryType<CartType>> = ({
   data,
-  isLoading,
+  isPending,
   isError,
 }) => {
   return (
@@ -12,7 +12,7 @@ const ShopDescription: FC<QueryType<CartType>> = ({
       <h3 className="text-[18px]  cursor-pointer text-[#46A358] border-b-2 border-[#46A358] py-2 mb-2">
         Product Description
       </h3>
-      {isLoading || isError ? (
+      {isPending || isError ? (
         <Skeleton />
       ) : (
         <p

@@ -2,7 +2,7 @@ import { useState, type FC } from "react";
 import { Image, Skeleton } from "antd";
 import { CartType, QueryType } from "../../../@types";
 
-const ShopSwiper: FC<QueryType<CartType>> = ({ data, isLoading, isError }) => {
+const ShopSwiper: FC<QueryType<CartType>> = ({ data, isPending, isError }) => {
   const [imgSrc, setImgSrc] = useState<string>("");
 
   return (
@@ -19,7 +19,7 @@ const ShopSwiper: FC<QueryType<CartType>> = ({ data, isLoading, isError }) => {
         ))}
       </div>
       <div className="cursor-pointer flex justify-center items-center w-full order-1">
-        {isLoading || isError ? (
+        {isPending || isError ? (
           <Skeleton.Image className="w-full !h-[300px] active" />
         ) : (
           <Image

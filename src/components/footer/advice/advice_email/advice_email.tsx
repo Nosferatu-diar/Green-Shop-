@@ -3,7 +3,7 @@ import { useSendEmail } from "../../../../hooks/useQueryHandler/useQueryAction";
 import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const AdvcieEmail = () => {
-  const { mutate, isLoading, isSuccess } = useSendEmail();
+  const { mutate, isPending, isSuccess } = useSendEmail();
   const submit = (e: { email: string }) => {
     mutate(e);
   };
@@ -41,7 +41,7 @@ const AdvcieEmail = () => {
             disabled={isSuccess}
             className="bg-[#46A358] flex items-center justify-center gap-1 text-base text-white h-[40px] px-4 rounded-r-md cursor-pointer rounded-nc"
           >
-            {isLoading ? (
+            {isPending ? (
               <LoadingOutlined />
             ) : isSuccess ? (
               <CheckOutlined />

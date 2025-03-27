@@ -1,7 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAxios } from "../../useAxios";
 import { useReduxDispatch } from "../../useRedux";
-import { setModalAuthorizationModalVisibilty } from "../../../redux/modalSlice";
+import {
+  setModalAuthorizationModalVisibilty,
+  setOrderModalVisibilty,
+} from "../../../redux/modalSlice";
 import { notificationApi } from "../../../generic/notification";
 import { signInWithGoogle } from "../../../config";
 import { cookieInfo } from "../../../generic/cookies";
@@ -135,11 +138,24 @@ export const useGetCoupon = () => {
     mutationFn: (coupon_code: string) =>
       axios({ url: "features/coupon", params: { coupon_code } }),
     onSuccess: (data) => {
-      dispatch(getCoupon(Number(data.data.discount_for))); 
+      dispatch(getCoupon(Number(data.data.discount_for)));
       notify("coupon");
     },
     onError: () => {
       notify("404_coupon");
+    },
+  });
+};
+
+export const useMakeOrderList = () => {
+  const axios = useAxios();
+  const dispatch = useReduxDispatch();
+
+  return useMutation({
+    mutationFn: (data: object) =>
+      axios({ url: "order/make-order", method: "POST", body: data }),
+    onSuccess: () => {
+      dispatch(setOrderModalVisibilty());
     },
   });
 };

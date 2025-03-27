@@ -7,17 +7,32 @@ import ShopDescription from "./shop-decription";
 
 const ShopComponent = () => {
   const { category, id }: { category?: string; id?: string } = useParams();
-  const { data, isLoading, isError }: QueryType<CartType> = useQueryHandler({
+  const { data, isPending, isError }: QueryType<CartType> = useQueryHandler({
     pathname: "product-id",
     url: `flower/category/${category}/${id}`,
   });
   return (
     <div className="py-10">
       <div className="grid grid-cols-2 max-[1165px]:grid-cols-1 gap-10 ">
-        <ShopSwiper data={data} isLoading={isLoading} isError={isError} />
-        <ShopInfo data={data} isLoading={isLoading} isError={isError} />
+        <ShopSwiper
+          data={data}
+          isPending
+          isLoading={isPending}
+          isError={isError}
+        />
+        <ShopInfo
+          data={data}
+          isPending
+          isLoading={isPending}
+          isError={isError}
+        />
       </div>
-      <ShopDescription data={data} isLoading={isLoading} isError={isError} />
+      <ShopDescription
+        data={data}
+        isPending
+        isLoading={isPending}
+        isError={isError}
+      />
     </div>
   );
 };

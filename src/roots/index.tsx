@@ -3,6 +3,7 @@ import MainLayout from "../components/main-layout";
 import Home from "../pages/home";
 import Shop from "../pages/shop";
 import ProductsShop from "../pages/products-shop";
+import ProcedCheckout from "../pages/proced-checkout";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "/products-shop",
         element: <ProductsShop />,
+      },
+      {
+        path: "/proced-checkout",
+        element: <ProcedCheckout />,
       },
     ],
   },

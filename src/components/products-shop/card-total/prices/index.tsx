@@ -1,5 +1,4 @@
 import { useReduxSelector } from "../../../../hooks/useRedux";
-
 const Prices = () => {
   const cupon_title_style = "text-[#3D3D3D] text-[15px] font-normal";
   const { data, coupon } = useReduxSelector((state) => state.shopSlice);
@@ -14,7 +13,6 @@ const Prices = () => {
             ${totalPrice?.toFixed()}
           </h2>
         </div>
-
         <div className="flex justify-between items-center pt-3">
           <h3 className={`${cupon_title_style}`}>Coupon Discount</h3>
           <h2 className="text-[#3D3D3D] text-[15px]">

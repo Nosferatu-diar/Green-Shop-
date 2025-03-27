@@ -10,10 +10,11 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { useReduxDispatch } from "../../hooks/useRedux";
+import { useReduxDispatch, useReduxSelector } from "../../hooks/useRedux";
 import { setModalAuthorizationModalVisibilty } from "../../redux/modalSlice";
 import { useState } from "react";
 import { cookieInfo } from "../../generic/cookies";
+import { Badge } from "antd";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,6 +23,7 @@ const Navbar = () => {
   const { isAuthorization, getCookie } = cookieInfo();
   const user = getCookie("user");
   const navigate = useNavigate();
+  const { data } = useReduxSelector((state) => state.shopSlice);
   //   const user = JSON.parse(localStorage.getItem("user") as string);
   return (
     <header className="flex items-center justify-between max-[530px]:justify-around py-5 border-b border-[#a2d1ab]">
@@ -62,8 +64,13 @@ const Navbar = () => {
       <div className="flex items-center  gap-6">
         <SearchOutlined className="text-[25px]" />
         <BellOutlined className="text-[25px]" />
-        <div onClick={()=> navigate("/products-shop")} className="cursor-pointer">
-          <ShoppingCartOutlined className="text-[25px]" />
+        <div
+          onClick={() => navigate("/products-shop")}
+          className="cursor-pointer"
+        >
+          <Badge count={data?.length}>
+            <ShoppingCartOutlined className="text-[25px]" />
+          </Badge>
         </div>
 
         {/* Burger/Menu btn */}

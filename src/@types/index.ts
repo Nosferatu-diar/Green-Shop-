@@ -8,6 +8,7 @@ export interface FieldType {
   email?: string;
   password?: string;
 }
+
 export interface FieldTypeRegisgter {
   name?: string;
   surname?: string;
@@ -37,6 +38,7 @@ export interface CategoryType {
 export interface QueryType<T> {
   isError: boolean;
   isLoading: boolean;
+  isPending: boolean;
   data?: T;
 }
 
@@ -106,17 +108,36 @@ export interface AdviceMockItemType {
   border: boolean;
 }
 
+export interface CartTypeData extends CartType {
+  counter: number;
+  userPrice: number;
+}
+
+interface WishListItemType {
+  flower_id: string;
+  route_path: string;
+}
+
+interface BillingAdres {
+  country?: string;
+  town?: string;
+  street_address?: string;
+  additional_street_address?: string;
+  state?: string;
+  zip?: string;
+}
+
 export interface AuthUser {
-  _id?: string;
+  _id: string;
   email?: string;
   name?: string;
   surname?: string;
   profile_photo?: string;
   create_account_limit?: number;
   phone_number?: string;
-  //   wishlist?: WishListItemType[];
+  wishlist?: WishListItemType[];
   username?: string;
-  //   billing_address?: BillingAdres;
+  billing_address?: BillingAdres;
   followers?: string[];
   permission?: {
     create: boolean;
@@ -126,7 +147,17 @@ export interface AuthUser {
   };
 }
 
-export interface CartTypeData extends CartType {
-  counter: number;
-  userPrice: number;
+export interface MakeOrderType {
+  name: string;
+  surname: string;
+  country: string;
+  street: string;
+  state: string;
+  email: string;
+  zip: string;
+  appartment: string;
+  town: string;
+  phone_number: string;
+  comment: string;
+  payment_method: string;
 }

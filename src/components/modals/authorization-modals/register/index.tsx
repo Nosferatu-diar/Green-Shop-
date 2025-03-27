@@ -8,8 +8,7 @@ import {
 } from "../../../../hooks/useQueryHandler/useQueryAction";
 import { LoadingOutlined } from "@ant-design/icons";
 const Register = () => {
-  const { mutate } = useRegisterMutate();
-  const isLoading = false; // or handle loading state appropriately
+  const { mutate, isPending } = useRegisterMutate();
   const { mutate: registerWithMutate } = useRegisterWithGoogle();
   const register = (e: FieldTypeRegisgter) => {
     mutate(e);
@@ -67,10 +66,10 @@ const Register = () => {
           Forgot Password ?
         </h3> */}
         <button
-          disabled={isLoading}
+          disabled={isPending}
           className="bg-[#46a358] w-full h-[40px] rounded-md text-white mt-3 text-[18px] opacity-100"
         >
-          {isLoading ? <LoadingOutlined /> : "Register"}
+          {isPending ? <LoadingOutlined /> : "Register"}
         </button>
       </Form>
       <div className="flex items-center justify-center mt-5 mb-5 gap-4">

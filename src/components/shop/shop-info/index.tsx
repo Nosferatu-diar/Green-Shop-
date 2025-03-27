@@ -4,10 +4,10 @@ import UserInfo from "./user-info";
 import { CartType, QueryType } from "../../../@types";
 import { HeartOutlined } from "@ant-design/icons";
 
-const ShopInfo: FC<QueryType<CartType>> = ({ data, isLoading, isError }) => {
+const ShopInfo: FC<QueryType<CartType>> = ({ data, isPending, isError }) => {
   const size_style =
     "w-[28px] h-[28px] border hover:border-[#45a358] border-gray-400 rounded-full transition-color hover:text-[#45a358] font-medium cursor-pointer";
-  const loading = isLoading || isError;
+  const loading = isPending || isError;
   return (
     <div>
       {loading ? (
