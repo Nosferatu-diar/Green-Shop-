@@ -172,3 +172,11 @@ export interface BlogType {
   views: number;
   _id: string;
 }
+
+export interface PathProfileType {
+  id: number;
+  title: string;
+  path: string;
+  Component: React.FC;
+  Icon: React.ForwardRefExoticComponent<any>;
+}

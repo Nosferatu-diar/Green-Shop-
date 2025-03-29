@@ -20,7 +20,7 @@ const BlogComponent = () => {
   return (
     <section className="">
       {isAuthorization ? <BlogSearch /> : <BlogHeader />}
-      <div className="gird grid-cols-3 gap-5 my-5">
+      <div className="grid grid-cols-3 max-[1024px]:grid-cols-2 max-[655px]:grid-cols-1 gap-5 my-5">
         {isPending || isError
           ? blog_card_loader()
           : data?.map((value) => <BlogCard key={value._id} {...value} />)}

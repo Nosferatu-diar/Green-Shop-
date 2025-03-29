@@ -147,15 +147,35 @@ export const useGetCoupon = () => {
   });
 };
 
+// const updateCookiesUser = (updater: any) => {
+//   const { setCookie, getCookie } = cookieInfo();
+//   const user = getCookie("user");
+//   return setCookie("user", { ...user, ...updater });
+// };
+
 export const useMakeOrderList = () => {
   const axios = useAxios();
   const dispatch = useReduxDispatch();
-
   return useMutation({
-    mutationFn: (data: object) =>
-      axios({ url: "order/make-order", method: "POST", body: data }),
+    mutationFn: (data: object) => {
+      return axios({ url: "order/make-order", method: "POST", body: data });
+    },
     onSuccess: () => {
       dispatch(setOrderModalVisibilty());
+    },
+  });
+};
+
+export const useEditDetails = () => {
+  const axios = useAxios();
+
+  return useMutation({
+    mutationFn: (data: object) => {
+      // updateCookiesUser(data);
+      return axios({ url: "user/account-details", method: "POST", body: data });
+    },
+    onSuccess: (data) => {
+      console.log(data);
     },
   });
 };

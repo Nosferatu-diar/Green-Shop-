@@ -5,6 +5,7 @@ import type {
   InfoMockItemType,
   FooterLinksType,
   AdviceMockItemType,
+  PathProfileType,
 } from "../@types";
 
 import post from "../assets/imgs/post.png";
@@ -17,6 +18,18 @@ import info1 from "../assets/imgs/info1.png";
 import advice from "../assets/imgs/advice.png";
 import advice1 from "../assets/imgs/advice1.png";
 import advice2 from "../assets/imgs/advice2.png";
+import {
+  DashboardOutlined,
+  EnvironmentOutlined,
+  HeartOutlined,
+  ShoppingOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import AccauntDetails from "../components/profile/profile-pages/accaunt-details";
+import MyProducts from "../components/profile/profile-pages/my-products";
+import Adress from "../components/profile/profile-pages/adress";
+import Wishlist from "../components/profile/profile-pages/wishlist";
+import TrackOrder from "../components/profile/profile-pages/track-order";
 
 export const hero_carousel: HeroCarouselType[] = [
   {
@@ -183,5 +196,43 @@ export const advice_item: AdviceMockItemType[] = [
       "We are an online plant shop offering a wide range of cheap and trendy plants.",
     img: advice2,
     border: true,
+  },
+];
+
+export const path_profile: PathProfileType[] = [
+  {
+    id: 1,
+    path: "",
+    Component: AccauntDetails,
+    Icon: UserOutlined,
+    title: "Account Details",
+  },
+  {
+    id: 2,
+    path: "my-products",
+    Component: MyProducts,
+    Icon: ShoppingOutlined,
+    title: "My Products",
+  },
+  {
+    id: 3,
+    path: "address",
+    Component: Adress,
+    Icon: EnvironmentOutlined,
+    title: "Adress",
+  },
+  {
+    id: 4,
+    path: "wishlist",
+    Component: Wishlist,
+    Icon: HeartOutlined,
+    title: "Wishlist",
+  },
+  {
+    id: 5,
+    path: "track-order",
+    Component: TrackOrder,
+    Icon: DashboardOutlined,
+    title: "Track Order",
   },
 ];
