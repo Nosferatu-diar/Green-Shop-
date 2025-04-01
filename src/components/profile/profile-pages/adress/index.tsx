@@ -1,5 +1,5 @@
 import { Form, Input } from "antd";
-import { AuthUser } from "../../../../@types";
+import { AdressType } from "../../../../@types";
 import { cookieInfo } from "../../../../generic/cookies";
 import { useEditAdress } from "../../../../hooks/useQueryHandler/useQueryAction";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -9,8 +9,8 @@ const Address = () => {
     "grid grid-cols-2 gap-4 max-[585px]:grid-cols-1 max-[585px]:gap-2";
   const { mutate, isPending } = useEditAdress();
   const { getCookie, setCookie } = cookieInfo();
-  const authUser: AuthUser = getCookie("user");
-  const finish = (e: any) => {
+  const authUser = getCookie("user");
+  const finish = (e: AdressType) => {
     mutate({ ...e, _id: authUser._id });
     setCookie("user", { ...authUser, ...e });
   };

@@ -3,6 +3,7 @@ import { useReduxDispatch, useReduxSelector } from "../../../hooks/useRedux";
 import Card from "../../proced-checkout/proced-total/card";
 import { setTrackModalVisiblty } from "../../../redux/modalSlice";
 import { useDeleteOrder } from "../../../hooks/useQueryHandler/useQueryAction";
+import { CartTypeData } from "../../../@types";
 
 const TrackModal = () => {
   const { trackModalVisiblty } = useReduxSelector((state) => state.modalSlice);
@@ -43,7 +44,7 @@ const TrackModal = () => {
       <h1 className="border-b border-[#46a358] font-bold text-xl py-2">
         Order Details
       </h1>
-      {order?.shop_list?.map((value: any) => (
+      {order?.shop_list?.map((value: CartTypeData) => (
         <Card key={value._id} {...value} />
       ))}
       <div className="flex items-center justify-between py-5">

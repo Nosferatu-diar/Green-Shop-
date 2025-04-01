@@ -3,17 +3,17 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload, UploadProps } from "antd";
 import { UploadFile } from "antd/es/upload/interface";
 import { cookieInfo } from "../../../../generic/cookies";
-import type { AuthUser } from "../../../../@types";
+import type { AccountDetails } from "../../../../@types";
 import { useEditDetails } from "../../../../hooks/useQueryHandler/useQueryAction";
 
 const AccountDetails: React.FC = () => {
   const { getCookie, setCookie } = cookieInfo();
-  const user: AuthUser = getCookie("user");
+  const user = getCookie("user");
   const { mutate } = useEditDetails();
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  const updateDetails = (e: any) => {
+  const updateDetails = (e: AccountDetails) => {
     mutate({
       ...e,
       profile_photo: e.profile_photo.file?.response?.image_url?.url,
