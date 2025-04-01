@@ -194,11 +194,13 @@ export const useEditAdress = () => {
   });
 };
 
+// useDeleteOrderCache
+
 const useDeleteOrderCache = () => {
   const queryClient = useQueryClient();
   return ({ _id }: { _id: string }) => {
     queryClient.setQueryData(
-      "order-list",
+      ["order-list"],
       (oldData: OrderType[] | undefined) => {
         if (oldData) {
           return oldData?.filter((value) => value._id !== _id) || [];
