@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAxios } from "../../useAxios";
 import { useReduxDispatch } from "../../useRedux";
 import {
@@ -9,6 +9,7 @@ import { notificationApi } from "../../../generic/notification";
 import { signInWithGoogle } from "../../../config";
 import { cookieInfo } from "../../../generic/cookies";
 import { getCoupon } from "../../../redux/shopSlice";
+import { OrderType } from "../../../@types";
 
 // login
 export const useLoginMutate = () => {
@@ -113,6 +114,7 @@ export const useRegisterWithGoogle = () => {
   });
 };
 
+// end emal
 export const useSendEmail = () => {
   const axios = useAxios();
   const notify = notificationApi();
@@ -147,12 +149,7 @@ export const useGetCoupon = () => {
   });
 };
 
-// const updateCookiesUser = (updater: any) => {
-//   const { setCookie, getCookie } = cookieInfo();
-//   const user = getCookie("user");
-//   return setCookie("user", { ...user, ...updater });
-// };
-
+//
 export const useMakeOrderList = () => {
   const axios = useAxios();
   const dispatch = useReduxDispatch();
@@ -166,16 +163,69 @@ export const useMakeOrderList = () => {
   });
 };
 
+//
 export const useEditDetails = () => {
   const axios = useAxios();
+  const notify = notificationApi();
 
   return useMutation({
     mutationFn: (data: object) => {
       // updateCookiesUser(data);
       return axios({ url: "user/account-details", method: "POST", body: data });
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      notify("detailes");
+    },
+  });
+};
+
+//
+export const useEditAdress = () => {
+  const axios = useAxios();
+  const notify = notificationApi();
+
+  return useMutation({
+    mutationFn: (data: object) => {
+      return axios({ url: "user/address", method: "POST", body: data });
+    },
+    onSuccess: () => {
+      notify("address");
+    },
+  });
+};
+
+const useDeleteOrderCache = () => {
+  const queryClient = useQueryClient();
+  return ({ _id }: { _id: string }) => {
+    queryClient.setQueryData(
+      "order-list",
+      (oldData: OrderType[] | undefined) => {
+        if (oldData) {
+          return oldData?.filter((value) => value._id !== _id) || [];
+        } else {
+          return [];
+        }
+      }
+    );
+  };
+};
+
+export const useDeleteOrder = () => {
+  const axios = useAxios();
+  const deleteOrderCache = useDeleteOrderCache();
+  const notify = notificationApi();
+
+  return useMutation({
+    mutationFn: (data: { _id: string }) => {
+      deleteOrderCache(data);
+      return axios({
+        url: "order/delete-order",
+        method: "DELETE",
+        body: data,
+      });
+    },
+    onSuccess: () => {
+      notify("order");
     },
   });
 };

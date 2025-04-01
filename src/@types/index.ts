@@ -136,6 +136,12 @@ export interface AuthUser {
   create_account_limit?: number;
   phone_number?: string;
   wishlist?: WishListItemType[];
+  street_address?: string;
+  additional_street_address?: string;
+  state?: string;
+  zip?: string;
+  country?: string;
+  town?: string;
   username?: string;
   billing_address?: BillingAdres;
   followers?: string[];
@@ -179,4 +185,16 @@ export interface PathProfileType {
   path: string;
   Component: React.FC;
   Icon: React.ForwardRefExoticComponent<any>;
+}
+
+export interface OrderType {
+  billing_address: BillingAdres;
+  created_at: string;
+  created_by: string;
+  extra_shop_info: {
+    total: number;
+    method: string;
+  };
+  shop_list: CartType[];
+  _id: string;
 }

@@ -10,7 +10,10 @@ type NotificationApiType =
   | "delete_data"
   | "not_coupon"
   | "404_coupon"
-  | "coupon";
+  | "coupon"
+  | "address"
+  | "detailes"
+  | "order";
 
 export const notificationApi = () => {
   const notify = (type: NotificationApiType) => {
@@ -48,6 +51,18 @@ export const notificationApi = () => {
       case "coupon":
         return notification.success({
           message: "Coupon successfully added",
+        });
+      case "address":
+        return notification.success({
+          message: "Address edited successfully",
+        });
+      case "detailes":
+        return notification.success({
+          message: "Detailes edited successfully",
+        });
+      case "order":
+        return notification.success({
+          message: "Oredr deleted",
         });
       default:
         break;

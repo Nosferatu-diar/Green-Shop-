@@ -15,7 +15,7 @@ const OrderModal = () => {
   const track = () => {
     dispatch(order());
     dispatch(setOrderModalVisibilty());
-    navigate("/");
+    navigate("/profile/track-order");
   };
   return (
     <Modal

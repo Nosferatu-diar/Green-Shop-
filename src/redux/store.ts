@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalSlice from "./modalSlice";
 import shopSlice from "./shopSlice";
+import trackOrderSlice from "./trackOrderSlice";
 export const store = configureStore({
   reducer: {
     modalSlice,
     shopSlice,
+    trackOrderSlice,
   },
 });
 
