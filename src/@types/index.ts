@@ -1,4 +1,5 @@
-import React from "react";
+import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
+import React, { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export interface ComponentType {
   children: React.ReactNode;
@@ -185,7 +186,9 @@ export interface PathProfileType {
   title: string;
   path: string;
   Component: React.FC;
-  Icon: React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement>>;
+  Icon: ForwardRefExoticComponent<
+    AntdIconProps & RefAttributes<HTMLSpanElement>
+  >;
 }
 
 export interface OrderType {
