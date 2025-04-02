@@ -21,8 +21,6 @@ export const useAxios = () => {
     const endpoint = url.replace(/^\//, "");
     const fullUrl = `${baseUrl}/${endpoint}`;
 
-    console.log(`🔍 Requesting URL:`, fullUrl);
-
     try {
       const response = await axios({
         url: fullUrl,

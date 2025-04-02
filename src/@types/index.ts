@@ -113,7 +113,7 @@ export interface CartTypeData extends CartType {
   userPrice: number;
 }
 
-interface WishListItemType {
+export interface WishListItemType {
   flower_id: string;
   route_path: string;
 }
@@ -140,6 +140,7 @@ export interface AuthUser {
   additional_street_address?: string;
   state?: string;
   zip?: string;
+  //   wishlist?: string[];
   country?: string;
   town?: string;
   username?: string;

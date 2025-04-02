@@ -13,7 +13,9 @@ type NotificationApiType =
   | "coupon"
   | "address"
   | "detailes"
-  | "order";
+  | "order"
+  | "like"
+  | "dislike";
 
 export const notificationApi = () => {
   const notify = (type: NotificationApiType) => {
@@ -63,6 +65,14 @@ export const notificationApi = () => {
       case "order":
         return notification.success({
           message: "Oredr deleted",
+        });
+      case "like":
+        return notification.success({
+          message: "Aed to like",
+        });
+      case "dislike":
+        return notification.success({
+          message: "Deleted to like",
         });
       default:
         break;

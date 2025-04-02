@@ -1,6 +1,8 @@
-import { FC } from "react";
-import { CartType } from "../../../../../@types";
+import { FC, useState } from "react";
+import type { WishListItemType } from "../../../../../@types"; // Ensure this path is correct
+import { AuthUser, CartType } from "../../../../../@types";
 import {
+  HeartFilled,
   HeartOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
@@ -9,13 +11,54 @@ import { useNavigate } from "react-router-dom";
 import { useReduxDispatch } from "../../../../../hooks/useRedux";
 import { addData } from "../../../../../redux/shopSlice";
 import { notificationApi } from "../../../../../generic/notification";
+import { cookieInfo } from "../../../../../generic/cookies";
+import {
+  useDeleteIsLiked,
+  useIsLiked,
+} from "../../../../../hooks/useQueryHandler/useQueryAction";
 
 const Card: FC<CartType> = (props) => {
   const navigate = useNavigate();
+  const { mutate: disLiked } = useDeleteIsLiked();
+  const { mutate } = useIsLiked();
   const dispatch = useReduxDispatch();
   const notify = notificationApi();
+  const { getCookie, setCookie } = cookieInfo();
+  let user: AuthUser = getCookie("user");
+  const [wishlist, setWishlist] = useState<WishListItemType[]>(
+    user?.wishlist || []
+  );
+  const isLiked = wishlist.some((item) => item.flower_id == props._id);
+
+  const isLike = () => {
+    user = {
+      ...user,
+      wishlist: [
+        ...(user.wishlist || []),
+        { route_path: props.category, flower_id: props._id },
+      ],
+    };
+    setWishlist(user.wishlist!);
+    setCookie("user", user);
+    mutate({ route_path: props.category, flower_id: props._id });
+  };
+  const disLike = () => {
+    user = {
+      ...user,
+      wishlist: [
+        ...(user.wishlist
+          ? user.wishlist.filter((value) => value.flower_id !== props._id)
+          : []),
+      ],
+    };
+    setWishlist(user.wishlist!);
+    setCookie("user", user);
+    disLiked({ _id: props._id as string });
+  };
+
   const style_icons =
     "bg-[#FFFFFF] w-[35px] h-[35px] flex rounded-lg justify-center items-center cursor-pointer text-[20px]";
+
   return (
     <div className="cursor-pointer border-transparent border-t hover:border-[#46A358]">
       <div className="group h-[320px] max-[1000px]:300px max-[600px]:h-[250px] bg-[#f5f5f5] flex justify-center items-center relative">
@@ -34,9 +77,15 @@ const Card: FC<CartType> = (props) => {
           >
             <ShoppingCartOutlined className="text-[22px]" />
           </div>
-          <div className={style_icons}>
-            <HeartOutlined className="text-[22px]" />
-          </div>
+          {isLiked ? (
+            <div onClick={disLike} className={style_icons}>
+              <HeartFilled className="text-[22px] !text-red-500" />
+            </div>
+          ) : (
+            <div onClick={isLike} className={style_icons}>
+              <HeartOutlined className="text-[22px]" />
+            </div>
+          )}
           <div
             onClick={() => navigate(`/shop/${props.category}/${props._id}`)}
             className={style_icons}

@@ -41,16 +41,14 @@ export const useRegisterMutate = () => {
     mutationFn: (data: object) =>
       axios({ url: "user/sign-up", method: "POST", body: data }),
     onSuccess: (data) => {
-      console.log("useMutation onSuccess data :", data);
       const { token, user } = data.data;
       localStorage.setItem("token", token);
       setCookie("user", user);
-      // localStorage.setItem("user", JSON.stringify(user));
       notify("register");
       dispatch(setModalAuthorizationModalVisibilty());
     },
     onError: (error) => {
-      console.log(error);
+      console.log("useRegisterMutate Error", error);
     },
   });
 };
@@ -228,6 +226,40 @@ export const useDeleteOrder = () => {
     },
     onSuccess: () => {
       notify("order");
+    },
+  });
+};
+
+export const useIsLiked = () => {
+  const axios = useAxios();
+  const notify = notificationApi();
+  return useMutation({
+    mutationFn: (data: object) => {
+      return axios({
+        url: "user/create-wishlist",
+        method: "POST",
+        body: data,
+      });
+    },
+    onSuccess: () => {
+      notify("like");
+    },
+  });
+};
+
+export const useDeleteIsLiked = () => {
+  const axios = useAxios();
+  const notify = notificationApi();
+  return useMutation({
+    mutationFn: (data: { _id: string }) => {
+      return axios({
+        url: "user/delete-wishlist",
+        method: "DELETE",
+        body: data,
+      });
+    },
+    onSuccess: () => {
+      notify("dislike");
     },
   });
 };

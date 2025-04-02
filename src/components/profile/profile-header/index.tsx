@@ -4,7 +4,6 @@ import { path_profile } from "../../../utils";
 const ProfileHeader = () => {
   const { pathname } = useLocation();
   const pathname_second = pathname.slice(9);
-  console.log(pathname_second);
   const navigate = useNavigate();
   const active_style: string =
     "text-[#46a358] border-l-4 border-l-[#46a358] bg-white";
