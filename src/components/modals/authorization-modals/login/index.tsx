@@ -13,6 +13,7 @@ const Login = () => {
   const login = (e: FieldType) => {
     mutate(e);
   };
+
   return (
     <div className="w-[90%] m-auto ">
       <p className="pt-4">Enter your username and password to login.</p>
@@ -60,7 +61,9 @@ const Login = () => {
         <div className="w-[35%] max-[400px]:hidden h-[2px] bg-[#EAEAEA]"></div>
       </div>
       <button
-        onClick={() => loginWithMutate()}
+        onClick={async () => {
+          console.log(await loginWithMutate());
+        }}
         className="w-full flex items-center h-[40px] rounded-md justify-center border border-[#EAEAEA]  gap-2 mb-3 cursor-pointer"
       >
         <img src={google} alt="google" />

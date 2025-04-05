@@ -24,7 +24,12 @@ const Navbar = () => {
   const user = getCookie("user");
   const navigate = useNavigate();
   const { data } = useReduxSelector((state) => state.shopSlice);
-  //   const user = JSON.parse(localStorage.getItem("user") as string);
+
+  const { modalAuthorizationVisibilty } = useReduxSelector(
+    (state) => state.modalSlice
+  );
+  console.log("modalAuthorizationVisibilty", modalAuthorizationVisibilty);
+
   return (
     <header className="flex items-center justify-between max-[530px]:justify-around py-5 border-b border-[#a2d1ab]">
       {/* logo */}
@@ -167,7 +172,7 @@ const Navbar = () => {
             className="w-[100px] h-[35px] bg-[#46a358] text-white rounded-md flex items-center gap-2 justify-center cursor-pointer "
           >
             {isAuthorization ? (
-              user.name
+              user?.name
             ) : (
               <>
                 <LoginOutlined />

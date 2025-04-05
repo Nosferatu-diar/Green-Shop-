@@ -6,6 +6,7 @@ import type {
   FooterLinksType,
   AdviceMockItemType,
   PathProfileType,
+  ProfileTabType,
 } from "../@types";
 
 import post from "../assets/imgs/post.png";
@@ -30,6 +31,11 @@ import MyProducts from "../components/profile/profile-pages/my-products";
 import Adress from "../components/profile/profile-pages/adress";
 import Wishlist from "../components/profile/profile-pages/wishlist";
 import TrackOrder from "../components/profile/profile-pages/track-order";
+import About from "../components/user-page-children/user-details/about";
+import Products from "../components/user-page-children/user-details/products";
+import Posts from "../components/user-page-children/user-details/posts";
+import Likees from "../components/user-page-children/user-details/likees";
+import Followers from "../components/user-page-children/user-details/followers";
 
 export const hero_carousel: HeroCarouselType[] = [
   {
@@ -234,5 +240,33 @@ export const path_profile: PathProfileType[] = [
     Component: TrackOrder,
     Icon: DashboardOutlined,
     title: "Track Order",
+  },
+];
+
+export const profile_tab_items: ProfileTabType[] = [
+  {
+    key: "1",
+    label: "About",
+    Components: About,
+  },
+  {
+    key: "2",
+    label: "Products",
+    Components: Products,
+  },
+  {
+    key: "3",
+    label: "Posts",
+    Components: Posts,
+  },
+  {
+    key: "4",
+    label: "Likees",
+    Components: Likees,
+  },
+  {
+    key: "5",
+    label: "Followers",
+    Components: Followers,
   },
 ];

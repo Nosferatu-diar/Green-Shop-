@@ -155,6 +155,44 @@ export interface AuthUser {
   };
 }
 
+export interface IUser {
+  _id: string;
+  name: string;
+  surname: string;
+  password: string;
+  permission: {
+    create: boolean;
+    update: boolean;
+    delete: boolean;
+    read: boolean;
+  };
+  email: string;
+  user_type: string;
+  create_post_limit: number;
+  create_account_limit: number;
+  create_plant_limit: number;
+  hashtags: string[];
+  wishlist: {
+    route_path: string;
+    flower_id: string;
+  }[];
+  created_at: string;
+  __v: number;
+  order_list?: []; // agar bu object bo‘lsa, aniqlashtirib ber, to‘g‘rilab beraman
+  phone_number: string;
+  billing_address: {
+    country: string;
+    town: string;
+    street_address: string;
+    state: string;
+    zip: string;
+    extra_address: string;
+  };
+  username: string;
+  profile_photo: string;
+  followers: string[];
+}
+
 export interface MakeOrderType {
   name: string;
   surname: string;
@@ -231,4 +269,32 @@ export interface AccountDetails {
       };
     };
   };
+}
+
+export interface ProfileTabType {
+  key: string;
+  label: string;
+  Components: React.FC;
+}
+
+export interface BlogType {
+  content: string;
+  created_at: string;
+  created_by: string;
+  reaction_length: number;
+  short_description: string;
+  title: string;
+  views: number;
+  __v: number;
+  _id: string;
+}
+export interface BlogTypeApi {
+  data?: BlogType[];
+  isLoading: boolean;
+  isError: boolean;
+}
+export interface BlogTypeApiItem {
+  data?: BlogType;
+  isLoading: boolean;
+  isError: boolean;
 }

@@ -9,7 +9,7 @@ interface UserQueryType {
 
 const useQueryHandler = ({ pathname, url, params }: UserQueryType) => {
   const axios = useAxios();
-  return useQuery({
+  return useQuery({  
     queryKey: [pathname],
     queryFn: () => axios({ url, params }).then((data) => data.data),
   });

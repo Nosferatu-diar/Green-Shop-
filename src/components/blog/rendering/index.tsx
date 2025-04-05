@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useQueryHandler from "../../../hooks/useQueryHandler";
 import {
   EyeOutlined,
@@ -46,6 +46,7 @@ const Rendering = () => {
   const usersLoading: boolean = userLoading || userError;
   const dataLoading: boolean = isPending || isError;
   const { blog_id_loading } = useLoader();
+  const navigate = useNavigate();
   return (
     <section className="w-[90%] m-auto">
       {usersLoading || dataLoading ? (
@@ -53,7 +54,10 @@ const Rendering = () => {
       ) : (
         <div>
           <div className="flex  items-center justify-between my-5">
-            <div className="flex items-center gap-4">
+            <div
+              onClick={() => navigate(`/user-page/${user?._id}`)}  
+              className="flex items-center gap-4 cursor-pointer"
+            >
               <img
                 src={user?.profile_photo}
                 className="W-[50px] h-[50px] rounded-full"
@@ -78,7 +82,8 @@ const Rendering = () => {
             <h1 className="text-2xl max-[1024px]:text-xl max-[680px]:text-lg my-4 font-bold">
               {data?.title}
             </h1>
-            <div className="max-[330px]:text-sm"
+            <div
+              className="max-[330px]:text-sm"
               dangerouslySetInnerHTML={{ __html: data?.content as string }}
             ></div>
             <div className="flex items-center gap-4">

@@ -1,3 +1,4 @@
+// filepath: c:\Users\dilmu\OneDrive\Desktop\GreenShop\src\hooks\useAxios\index.ts
 import axios from "axios";
 
 interface RequestType {
@@ -9,40 +10,29 @@ interface RequestType {
 }
 
 export const useAxios = () => {
-  const request = async ({
+  const request = ({
     method = "GET",
     url,
     params,
     headers,
     body,
   }: RequestType) => {
-    // URL ni to‘g‘ri formatlash
-    const baseUrl = import.meta.env.VITE_BASE_URL?.replace(/\/$/, "") || "";
-    const endpoint = url.replace(/^\//, "");
-    const fullUrl = `${baseUrl}/${endpoint}`;
-
-    try {
-      const response = await axios({
-        url: fullUrl,
-        method,
-        data: body,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          ...headers,
-        },
-        params: {
-          access_token: "64bebc1e2c6d3f056a8c85b7",
-          ...params,
-        },
-      });
-
-      return response.data;
-    } catch (error) {
-      console.error("🚨 Axios error:", error);
-      return Promise.reject(error);
-    }
+    const fullUrl = `${import.meta.env.VITE_BASE_URL}/${url}`;
+    console.log(`Requesting URL: ${fullUrl}`);
+    return axios({
+      url: fullUrl,
+      method,
+      data: body,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        ...headers,
+      },
+      params: {
+        access_token: "64bebc1e2c6d3f056a8c85b7",
+        ...params,
+      },
+    }).then((data) => data.data);
   };
-
   return request;
 };
